@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-08-01
  */
 @RestController
-@RequestMapping("/authorityPo")
+@RequestMapping("/authority")
 public class AuthorityController {
 
 }
