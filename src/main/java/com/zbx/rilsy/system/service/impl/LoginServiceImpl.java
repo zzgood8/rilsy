@@ -14,6 +14,7 @@ import com.zbx.rilsy.system.dao.*;
 import com.zbx.rilsy.system.entity.form.LoginForm;
 import com.zbx.rilsy.system.entity.po.CaptchaPo;
 import com.zbx.rilsy.system.entity.po.UserPo;
+import com.zbx.rilsy.system.entity.vo.LoginInfoVo;
 import com.zbx.rilsy.system.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -126,6 +127,18 @@ public class LoginServiceImpl implements ILoginService {
         captchaDao.insert(captcha);
         // 写入验证码图片
         gifCaptcha.write(out);
+    }
+
+    @Override
+    public LoginInfoVo getLoginInfo() {
+        String username = StpUtil.getLoginIdAsString();
+        UserPo userPo = userDao.selectOne(new QueryWrapper<UserPo>().eq("username", username));
+        LoginInfoVo loginInfoVo = new LoginInfoVo();
+        loginInfoVo.setId(userPo.getId());
+        loginInfoVo.setUsername(userPo.getUsername());
+        loginInfoVo.setNickname(userPo.getNickname());
+        loginInfoVo.setAvatar(userPo.getAvatar());
+        return loginInfoVo;
     }
 
 }

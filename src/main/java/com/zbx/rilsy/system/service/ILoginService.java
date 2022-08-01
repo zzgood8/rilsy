@@ -1,6 +1,7 @@
 package com.zbx.rilsy.system.service;
 
 import com.zbx.rilsy.system.entity.form.LoginForm;
+import com.zbx.rilsy.system.entity.vo.LoginInfoVo;
 
 import java.io.OutputStream;
 
@@ -29,5 +30,11 @@ public interface ILoginService {
      * @param out 输出流
      */
     void generateCaptcha(String uuid, OutputStream out);
+
+    /**
+     * 获取登录用户信息
+     * @return 用户信息
+     */
+    LoginInfoVo getLoginInfo();
 
 }
