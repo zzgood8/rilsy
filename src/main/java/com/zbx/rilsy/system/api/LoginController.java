@@ -62,7 +62,7 @@ public class LoginController {
     @PostMapping("/logout")
     public Result<String> logout() {
         loginService.logout();
-        return Result.success("logout success");
+        return Result.success("登出成功");
     }
 
     // 获取验证码

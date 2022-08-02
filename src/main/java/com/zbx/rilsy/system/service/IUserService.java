@@ -3,6 +3,8 @@ package com.zbx.rilsy.system.service;
 import com.zbx.rilsy.system.entity.po.UserPo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 系统用户 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<UserPo> {
 
+    List<String> getAuthPathByUsername(String username);
 }

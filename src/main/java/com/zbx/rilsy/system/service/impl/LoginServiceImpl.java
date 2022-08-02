@@ -74,12 +74,12 @@ public class LoginServiceImpl implements ILoginService {
             fail.setId(userPo.getId());
             fail.setLoginFailure(userPo.getLoginFailure() + 1);
             userDao.updateById(fail);
+            // 多次失败提醒,超过5次,每次间隔5分钟
+            if (userPo.getLoginFailure() > 5) {
+                StpUtil.disable(userPo.getUsername(), 60 * 5); // 封禁五分钟
+                log.warn("用户多次尝试登录失败,已尝试次数: {}", userPo.getLoginFailure());
+            }
             throw new BaseException(Status.PASSWORD_ERROR);
-        }
-        // 多次失败提醒,超过5次,每次间隔5分钟
-        if (userPo.getLoginFailure() > 5) {
-            StpUtil.disable(userPo.getUsername(), 60 * 5); // 封禁五分钟
-            log.warn("用户多次尝试登录失败,已尝试次数: {}", userPo.getLoginFailure());
         }
         // 登录成功
         try {

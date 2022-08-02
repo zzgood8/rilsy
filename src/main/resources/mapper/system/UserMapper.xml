@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbx.rilsy.system.dao.UserDao">
 
+    <select id="selectAuthPathByUsername" resultType="java.lang.String">
+        select sa.path
+        from system_user su
+                 join system_user_group sug on su.id = sug.user_id
+                 join system_group_authority sga on sug.group_id = sga.group_id
+                 join system_authority sa on sga.authority_id = sa.id
+        where su.username = #{username} and sa.type = 'button'
+    </select>
+
 </mapper>
